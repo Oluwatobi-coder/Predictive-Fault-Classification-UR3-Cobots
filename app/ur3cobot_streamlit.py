@@ -145,22 +145,15 @@ if model and scaler:
 
                 bars = ax.bar(labels, values, color=colors, edgecolor='white', linewidth=0.5)
                 
-                ax.spines['top'].set_visible(False)    # Remove top border
-                ax.spines['right'].set_visible(False)  # Remove right border
-                ax.spines['left'].set_color('#888888') # Soften left border
-                ax.spines['bottom'].set_position('zero') # Put X-axis at zero
+                ax.spines['top'].set_visible(False) 
+                ax.spines['right'].set_visible(False) 
+                ax.spines['left'].set_color('#888888')
+                ax.spines['bottom'].set_position('zero')
                 
                 ax.yaxis.grid(True, linestyle='--', alpha=0.7)
-                ax.set_axisbelow(True) # Grid goes behind bars
-                ax.set_ylabel('Current (A)', fontsize=10, color='#666666')
-                ax.set_title('Joint Sensor Inputs', fontsize=14, pad=20, fontweight='bold')
-
-                for bar in bars:
-                    yval = bar.get_height()
-                    va = 'bottom' if yval >= 0 else 'top'
-                    ax.text(bar.get_x() + bar.get_width()/2, yval, f'{yval:.2f}', 
-                            ha='center', va=va, fontsize=9, fontweight='bold', color='#444444')
-                
+                ax.set_axisbelow(True)
+                ax.set_ylabel('Current (A)', fontsize=10, color='#666666)
+      
                 st.pyplot(fig)
 
 
