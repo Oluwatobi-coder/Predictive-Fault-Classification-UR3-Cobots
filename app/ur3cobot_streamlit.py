@@ -124,11 +124,16 @@ if model and scaler:
 
             with res_col2:
                 st.subheader("Current Sensor Inputs")
-                clean_dict = {
-                    'Sensor': [str(i) for i in ['J0', 'J1', 'J2', 'J3', 'J4', 'J5']],
-                    'Current': [float(x) for x in [c0, c1, c2, c3, c4, c5]]
+                # 1. Setup data
+                data = {
+                    'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
+                    'Current': [c0, c1, c2, c3, c4, c5]
                 }
-                input_df = pd.DataFrame.from_dict(clean_dict)
+                input_df = pd.DataFrame(data)
+                
+                input_df['Current'] = pd.to_numeric(input_df['Current'], errors='coerce')
+                
+                input_df['Current'] = input_df['Current'].replace([np.inf, -np.inf], np.nan).fillna(0.0)
                 
                 st.bar_chart(input_df, x="Sensor", y="Current")
 
