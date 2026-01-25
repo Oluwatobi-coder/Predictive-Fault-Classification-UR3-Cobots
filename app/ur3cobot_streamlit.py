@@ -131,7 +131,7 @@ if model and scaler:
                     'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
                     'Current': [float(c0), float(c1), float(c2), float(c3), float(c4), float(c5)]
                 })
-                
+                st.write([c0, c1, c2, c3, c4, c5])
                 fig = px.bar(
                     df, 
                     x='Sensor', 
@@ -140,12 +140,10 @@ if model and scaler:
                     text_auto='.2f',
                     color='Current',
                 )
-                
-                # 3. Force the layout to look clean
+
                 fig.update_layout(xaxis_tickangle=0)
                 
-                # 4. Display (theme=None ensures Streamlit doesn't try to "re-process" it)
-                st.plotly_chart(fig, use_container_width=True, theme=None)
+                st.plotly_chart(fig, width="content")
 
 
         # setting up the performance metrics in the sidebar
