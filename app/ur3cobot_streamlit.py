@@ -152,7 +152,7 @@ if model and scaler:
                 
                 ax.yaxis.grid(True, linestyle='--', alpha=0.7)
                 ax.set_axisbelow(True)
-                ax.set_ylabel('Current (A)', fontsize=10, color='#666666)
+                ax.set_ylabel('Current (A)', fontsize=10)
       
                 st.pyplot(fig)
 
