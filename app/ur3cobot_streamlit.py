@@ -44,14 +44,14 @@ if model and scaler:
         "", 
         min_value=0.1, max_value=0.9, value=0.48, step=0.05)
     
-    st.sidebar.divider()
+    st.sidebar.markdown("---")
     st.sidebar.subheader("System Performance")
     
 
     # setting up the main container for results
     results_container = st.container()
 
-    st.divider()
+    st.markdown("---")
 
     # setting up the analysis button
     run_scan = st.button("Run Diagnostic Scan", use_container_width=True, type="primary")
@@ -104,7 +104,7 @@ if model and scaler:
         latency = (t_end - t_start) * 1000
         
         # displaying the results
-        st.divider()
+        st.markdown("---")
 
         with results_container:
             st.info("### 🔍 Diagnostic Results")
