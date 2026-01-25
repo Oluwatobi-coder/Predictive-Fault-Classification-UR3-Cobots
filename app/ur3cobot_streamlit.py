@@ -130,7 +130,7 @@ if model and scaler:
                     'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
                     'Current': i_values
                 }).set_index('Sensor')
-                
+                st.write([type(c) for c in [c0, c1, c2, c3, c4, c5]])
                 st.bar_chart(input_df)
 
         # setting up the performance metrics in the sidebar
