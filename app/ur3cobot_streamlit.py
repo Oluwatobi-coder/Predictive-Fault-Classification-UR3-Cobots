@@ -125,16 +125,13 @@ if model and scaler:
             with res_col2:
                 st.subheader("Current Sensor Inputs")
                 # setting up a bar chart for joint currents
+                i_values = [float(x) for x in [c0, c1, c2, c3, c4, c5]]
                 input_df = pd.DataFrame({
                     'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
-                    'Current': [c0, c1, c2, c3, c4, c5]
-                })
+                    'Current': i_values
+                }).set_index('Sensor')
                 
-                input_df['Current'] = input_df['Current'].astype(float)
-                input_df['Sensor'] = input_df['Sensor'].astype(str)
-                
-                chart_data = input_df.set_index('Sensor')
-                st.bar_chart(chart_data)
+                st.bar_chart(input_df)
 
         # setting up the performance metrics in the sidebar
         st.sidebar.write(f"Inference Latency: `{latency:.3f} ms`")
