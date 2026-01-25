@@ -9,3 +9,5 @@ joblib
 openpyxl
 altair==4.2.2
 standard-imghdr
+pyarrow==14.0.1
+plotly
