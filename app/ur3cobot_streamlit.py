@@ -124,19 +124,17 @@ if model and scaler:
 
             with res_col2:
                 st.subheader("Current Sensor Inputs")
-                # 1. Setup data
-                data = {
-                    'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
-                    'Current': [c0, c1, c2, c3, c4, c5]
-                }
-                input_df = pd.DataFrame(data)
-                
-                input_df['Current'] = pd.to_numeric(input_df['Current'], errors='coerce')
-                
-                input_df['Current'] = input_df['Current'].replace([np.inf, -np.inf], np.nan).fillna(0.0)
 
-                st.dataframe(input_df)
-                st.bar_chart(input_df, x="Sensor", y="Current")
+                labels = ['J0', 'J1', 'J2', 'J3', 'J4', 'J5']
+                values = [float(c0), float(c1), float(c2), float(c3), float(c4), float(c5)]
+                
+                fig, ax = plt.subplots()
+                ax.bar(labels, values, color='blue')
+                ax.set_ylabel('Current')
+                ax.set_title('Joint Currents')
+            
+                st.pyplot(fig)
+                st.table(pd.DataFrame({'Sensor': labels, 'Current': values}))
 
         # setting up the performance metrics in the sidebar
         st.sidebar.write(f"Inference Latency: `{latency:.3f} ms`")
