@@ -135,7 +135,7 @@ if model and scaler:
                 fig = px.bar(
                     df, 
                     x='Sensor', 
-                    y='Current', 
+                    y='Current (A)', 
                     title="Joint Currents",
                     text_auto='.2f',
                     color='Current',
