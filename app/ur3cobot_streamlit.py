@@ -11,7 +11,7 @@ st.set_page_config(page_title="UR3 CobotOps Diagnostic Tool", layout="wide", pag
 # adding custon CSS styles
 st.markdown("""
     <style>
-    .main { background-color: #e6f7ff; }
+    .main { background-color: #ffffff; }
     .stMetric { background-color: #ffffff; padding: 15px; border-radius: 10px; border: 1px solid #e0e0e0; }
     </style>
     """, unsafe_allow_html=True)
