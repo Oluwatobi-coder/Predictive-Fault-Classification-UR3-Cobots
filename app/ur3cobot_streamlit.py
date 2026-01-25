@@ -134,7 +134,8 @@ if model and scaler:
                 input_df['Current'] = pd.to_numeric(input_df['Current'], errors='coerce')
                 
                 input_df['Current'] = input_df['Current'].replace([np.inf, -np.inf], np.nan).fillna(0.0)
-                
+
+                st.dataframe(input_df)
                 st.bar_chart(input_df, x="Sensor", y="Current")
 
         # setting up the performance metrics in the sidebar
