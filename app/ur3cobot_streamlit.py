@@ -34,15 +34,15 @@ st.markdown("This tool allows operators to simulate real-time sensor inputs from
 
 # setting up the sidebar
 st.sidebar.image("./app_assets/ur3cobot.png", 
-                 caption="**UR3 Collaborative Robot System**")
+                 caption="UR3 Collaborative Robot System")
 
 if model and scaler:
     # --- SIDEBAR CONFIG ---
     st.sidebar.header("⚙️ Sensitivity Threshold")
     st.sidebar.markdown("Lower threshold increases sensitivity to potential fault.")
     threshold = st.sidebar.slider(
-        "", 
-        min_value=0.1, max_value=0.9, value=0.48, step=0.05)
+        "Select Sensitivity", 
+        min_value=0.1, max_value=0.9, value=0.48, step=0.05, label_visibility="collapsed")
     
     st.sidebar.markdown("---")
     st.sidebar.subheader("System Performance")
