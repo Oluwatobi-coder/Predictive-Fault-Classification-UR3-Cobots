@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import plotly.express as px
 import joblib
 import time
 
@@ -125,17 +126,27 @@ if model and scaler:
 
             with res_col2:
                 st.subheader("Current Sensor Inputs")
-
-                labels = ['J0', 'J1', 'J2', 'J3', 'J4', 'J5']
-                values = [float(c0), float(c1), float(c2), float(c3), float(c4), float(c5)]
+                # plotting the current sensor inputs
+                df = pd.DataFrame({
+                    'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
+                    'Current': [float(c0), float(c1), float(c2), float(c3), float(c4), float(c5)]
+                })
                 
-                fig, ax = plt.subplots()
-                ax.bar(labels, values, color='blue')
-                ax.set_ylabel('Current')
-                ax.set_title('Joint Currents')
-            
-                st.pyplot(fig)
-                st.table(pd.DataFrame({'Sensor': labels, 'Current': values}).astype(object))
+                fig = px.bar(
+                    df, 
+                    x='Sensor', 
+                    y='Current', 
+                    title="Joint Currents",
+                    text_auto='.2f',
+                    color='Current',
+                )
+                
+                # 3. Force the layout to look clean
+                fig.update_layout(xaxis_tickangle=0)
+                
+                # 4. Display (theme=None ensures Streamlit doesn't try to "re-process" it)
+                st.plotly_chart(fig, use_container_width=True, theme=None)
+
 
         # setting up the performance metrics in the sidebar
         st.sidebar.write(f"Inference Latency: `{latency:.3f} ms`")
