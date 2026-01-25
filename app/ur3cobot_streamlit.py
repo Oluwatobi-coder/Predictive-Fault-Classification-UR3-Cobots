@@ -135,7 +135,7 @@ if model and scaler:
                 ax.set_title('Joint Currents')
             
                 st.pyplot(fig)
-                st.table(pd.DataFrame({'Sensor': labels, 'Current': values}))
+                st.table(pd.DataFrame({'Sensor': labels, 'Current': values}).astype(object))
 
         # setting up the performance metrics in the sidebar
         st.sidebar.write(f"Inference Latency: `{latency:.3f} ms`")
