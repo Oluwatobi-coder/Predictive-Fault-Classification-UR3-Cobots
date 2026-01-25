@@ -127,33 +127,46 @@ if model and scaler:
             with res_col2:
                 st.subheader("Current Sensor Inputs")
 
-                # setting up a bar chart for joint currents
+                # setting up a bar chart for joint currents             
                 labels = ['J0', 'J1', 'J2', 'J3', 'J4', 'J5']
                 values = [float(c0), float(c1), float(c2), float(c3), float(c4), float(c5)]
                 
-                plt.rcParams.update({
-                    "figure.facecolor": (0, 0, 0, 0), 
-                    "axes.facecolor": (0, 0, 0, 0),   
-                    "axes.edgecolor": "#CCCCCC",
-                    "grid.color": "#DDDDDD",
-                    "font.family": "sans-serif"
-                })
-                
-                fig, ax = plt.subplots(figsize=(8, 4))
+                fig, ax = plt.subplots(figsize=(8, 4.5))
+                fig.patch.set_alpha(0)
+                ax.set_facecolor("none")
                 
                 colors = ['#2ecc71' if v >= 0 else '#e74c3c' for v in values]
-
-                bars = ax.bar(labels, values, color=colors, edgecolor='white', linewidth=0.5)
+                bars = ax.bar(labels, values, color=colors, edgecolor='white', linewidth=1, zorder=3)
                 
-                ax.spines['top'].set_visible(False) 
-                ax.spines['right'].set_visible(False) 
-                ax.spines['left'].set_color('#888888')
                 ax.spines['bottom'].set_position('zero')
+                ax.spines['bottom'].set_color('#cccccc')
+                ax.tick_params(axis='x', direction='out', pad=150)
                 
-                ax.yaxis.grid(True, linestyle='--', alpha=0.7)
-                ax.set_axisbelow(True)
-                ax.set_ylabel('Current (A)', fontsize=10)
-      
+                ax.set_xticks(range(len(labels)))
+                ax.set_xticklabels([])
+                
+                for i, label in enumerate(labels):
+                    ax.text(i, -0.15, label, transform=ax.get_xaxis_transform(), 
+                            ha='center', va='top', fontsize=11)
+                
+                for bar in bars:
+                    yval = bar.get_height()
+                    
+                    offset = 0.05 if yval >= 0 else -0.05
+                    va = 'bottom' if yval >= 0 else 'top'
+                    
+                    ax.text(bar.get_x() + bar.get_width()/2, yval + offset, 
+                            f'{yval:.2f}', ha='center', va=va, 
+                            fontsize=10,)
+                
+                ax.spines['top'].set_visible(False)
+                ax.spines['right'].set_visible(False)
+                ax.spines['left'].set_color('#cccccc')
+                ax.yaxis.grid(True, linestyle='--', alpha=0.4, zorder=0)
+                
+                ymin, ymax = min(values), max(values)
+                ax.set_ylim(min(ymin * 1.3, -1), max(ymax * 1.3, 1))
+                
                 st.pyplot(fig)
 
 
