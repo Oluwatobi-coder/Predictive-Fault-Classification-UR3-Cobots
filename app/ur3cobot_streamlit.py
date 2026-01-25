@@ -128,7 +128,7 @@ if model and scaler:
                 input_df = pd.DataFrame({
                     'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
                     'Current': [c0, c1, c2, c3, c4, c5]
-                }).astype(str)
+                })
                 st.bar_chart(input_df.set_index('Sensor'))
 
         # setting up the performance metrics in the sidebar
