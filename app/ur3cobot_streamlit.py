@@ -130,6 +130,7 @@ if model and scaler:
                     'Current': [c0, c1, c2, c3, c4, c5]
                 })
                 input_df['Current'] = pd.to_numeric(input_df['Current'], errors='coerce').fillna(0)
+                st.write(input_df.dtypes)
                 st.bar_chart(input_df.set_index('Sensor'))
 
         # setting up the performance metrics in the sidebar
