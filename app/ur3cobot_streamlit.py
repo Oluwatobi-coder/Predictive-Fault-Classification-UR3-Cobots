@@ -126,30 +126,14 @@ if model and scaler:
 
             with res_col2:
                 st.subheader("Current Sensor Inputs")
-                # plotting the current sensor inputs
-                sensor_data = [c0, c1, c2, c3, c4, c5]
-                
-                df = pd.DataFrame({
-                'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
-                'Current': [float(x) for x in sensor_data]
-                })
-                
-                fig = px.bar(
-                df, 
-                x='Sensor', 
-                y='Current',
-                range_y=[min(df['Current']) - 1, max(df['Current']) + 1],
-                color='Current',
-                color_continuous_scale='RdBu_r', 
-                color_continuous_midpoint=0
-                )
-                
-                fig.update_layout(
-                yaxis=dict(zeroline=True, zerolinewidth=2, zerolinecolor='Black'),
-                uirevision='constant'
-                )
 
-                st.plotly_chart(fig, width="content", theme=None, key="sensor_chart_update")
+                # setting up a bar chart for joint currents
+                input_df = pd.DataFrame({
+                    'Sensor': ['J0', 'J1', 'J2', 'J3', 'J4', 'J5'],
+                    'Current': [c0, c1, c2, c3, c4, c5]
+                }).astype(object)
+                
+                st.bar_chart(input_df.set_index('Sensor'))
 
 
         # setting up the performance metrics in the sidebar
